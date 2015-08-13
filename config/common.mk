@@ -289,10 +289,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.bliss.version=$(BLISS_VERSION)
 
 # Team Bliss OTA Updater
-
-# This works, but there has to be a better way of reliably getting the root build directory...
-    DEVICE=$(TARGET_DEVICE)
-
 ifeq ($(BLISS_DONATE),)
   BLISS_DONATE =: http://goo.gl/tymMFo
 endif
