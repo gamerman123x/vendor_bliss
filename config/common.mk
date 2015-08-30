@@ -161,7 +161,7 @@ PRODUCT_PACKAGES += \
 
 # Custom CM packages
 PRODUCT_PACKAGES += \
-    Camera2 \
+    Snap \
     Launcher3 \
     Trebuchet \
     CMWallpapers \
