@@ -163,16 +163,7 @@ PRODUCT_PACKAGES += \
 
 # Custom CM packages
 PRODUCT_PACKAGES += \
-    Snap \
-    Launcher3 \
-    Trebuchet \
-    CMWallpapers \
-    CMFileManager \
-    Eleven \
-    LockClock \
-    CMAccount \
-    CMHome \
-    MonthCalendarWidget
+    LockClock
 
 # CM Platform Library
 PRODUCT_PACKAGES += \
@@ -188,9 +179,7 @@ PRODUCT_PACKAGES += \
 # Other packages
 PRODUCT_PACKAGES += \
     KernelAdiutor \
-    OmniSwitch \
-    BlissPapers \
-    BlissOTA
+    OmniSwitch
 
 # Extra tools in Bliss
 PRODUCT_PACKAGES += \
@@ -256,7 +245,8 @@ PRODUCT_PACKAGES += \
 
 # HFM Files
 PRODUCT_COPY_FILES += \
-    vendor/bliss/prebuilt/etc/xtwifi.conf:system/etc/xtwifi.conf
+    vendor/bliss/prebuilt/etc/hosts.alt:system/etc/hosts.alt \
+    vendor/bliss/prebuilt/etc/hosts.og:system/etc/hosts.og
 
 endif
 
@@ -289,33 +279,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     BUILD_DISPLAY_ID=$(BUILD_ID) \
     ro.bliss.version=$(BLISS_VERSION)
 
-# Team Bliss OTA Updater
-ifeq ($(BLISS_DONATE),)
-  BLISS_DONATE =: http://goo.gl/tymMFo
-endif
-BLISS_OTA_BUILDDIR := Official
-ifeq ($(BLISS_BUILDTYPE),NIGHTLY)
-  BLISS_OTA_BUILDDIR := Nightlies
-endif
-BLISS_BASE_URL    := http://downloads.blissroms.com/BlissPop
-ifeq ($(BLISS_DEVICE_URL),)
-  BLISS_DEVICE_URL := $(BLISS_BASE_URL)/$(BLISS_OTA_BUILDDIR)/$(TARGET_DEVICE)
-endif
-BLISS_OTA_VERSION := $(shell date +%Y%m%d%H)
-BLISS_ROM_NAME    := BlissPop
-
-# Lib For Webview
-ifeq ($(OTA_64),true)
-TARGET_ARCH_ABI := arm64-v8a
-TARGET_LIB_DIR := lib64
-else
-TARGET_ARCH_ABI := armeabi-v7a
-TARGET_LIB_DIR := lib
-endif
-
-PRODUCT_COPY_FILES += \
-    vendor/bliss/prebuilt/$(TARGET_LIB_DIR)/$(TARGET_ARCH_ABI)/libbypass.so:system/$(TARGET_LIB_DIR)/libbypass.so
-
 ifndef CM_PLATFORM_SDK_VERSION
   # This is the canonical definition of the SDK version, which defines
   # the set of APIs and functionality available in the platform.  It
@@ -326,17 +289,6 @@ ifndef CM_PLATFORM_SDK_VERSION
   CM_PLATFORM_SDK_VERSION := 2
 endif
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.ota.systemname=$(BLISS_ROM_NAME) \
-    ro.ota.version=$(BLISS_OTA_VERSION) \
-    ro.ota.device=$(TARGET_DEVICE) \
-    ro.ota.manifest=$(BLISS_DEVICE_URL)/ota$(BLISS_OTA_XMLVER).xml
-
-export BLISS_OTA_ROM=$(BLISS_ROM_NAME)
-export BLISS_OTA_VERNAME=$(BLISS_VERSION)
-export BLISS_OTA_VER=$(BLISS_OTA_VERSION)
-export BLISS_OTA_URL=$(BLISS_DEVICE_URL)/$(BLISS_VERSION).zip
-
 # CyanogenMod Platform SDK Version
 PRODUCT_PROPERTY_OVERRIDES += \
   ro.cm.build.version.plat.sdk=$(CM_PLATFORM_SDK_VERSION)
@@ -346,3 +298,33 @@ PRODUCT_PROPERTY_OVERRIDES += \
 -include vendor/cyngn/product.mk
 
 $(call prepend-product-if-exists, vendor/extra/product.mk)
+
+##                     ##
+#- Gamerman123x Extras -# 
+##                     ##
+
+# CameraNextMod
+PRODUCT_COPY_FILES += \
+    vendor/bliss/prebuilt/CameraNextMod/CameraNextMod.apk:system/app/CameraNextMod/CameraNextMod.apk \
+    vendor/bliss/prebuilt/CameraNextMod/libjni_mosaic_next.so:system/lib/libjni_mosaic_next.so \
+    vendor/bliss/prebuilt/CameraNextMod/libjni_tinyplanet_next.so:system/lib/libjni_tinyplanet_next.so
+
+# ES File Explorer
+PRODUCT_COPY_FILES += \
+    vendor/bliss/prebuilt/ESFileExplorer/ESFileExplorer.apk:system/app/ESFileExplorer/ESFileExplorer.apk \
+    vendor/bliss/prebuilt/ESFileExplorer/libmyaes.so:system/lib/libmyaes.so
+
+# Nova Launcher
+PRODUCT_COPY_FILES += \
+    vendor/bliss/prebuilt/NovaLauncher.apk:system/app/NovaLauncher/NovaLauncher.apk
+
+# Poweramp
+PRODUCT_COPY_FILES += \
+    vendor/bliss/prebuilt/Poweramp/Poweramp.apk:system/app/Poweramp/Poweramp.apk \
+    vendor/bliss/prebuilt/Poweramp/libstubnotused.so:system/lib/libstubnotused.so
+
+# Quick Pic
+PRODUCT_COPY_FILES += \
+    vendor/bliss/prebuilt/QuickPic/QuickPic.apk:system/app/QuickPic/QuickPic.apk \
+    vendor/bliss/prebuilt/QuickPic/libkinfoc.so:system/lib/libkinfoc.so \
+    vendor/bliss/prebuilt/QuickPic/libqpicjni156.so:system/lib/libqpicjni156.so
