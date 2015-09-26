@@ -242,11 +242,6 @@ PRODUCT_PACKAGES += \
     procrank \
     su
 
-# HFM Files
-PRODUCT_COPY_FILES += \
-    vendor/bliss/prebuilt/etc/hosts.alt:system/etc/hosts.alt \
-    vendor/bliss/prebuilt/etc/hosts.og:system/etc/hosts.og
-
 endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -302,6 +297,12 @@ $(call prepend-product-if-exists, vendor/extra/product.mk)
 #- Gamerman123x Extras -# 
 ##                     ##
 
+# AdAway
+PRODUCT_COPY_FILES += \
+    vendor/bliss/prebuilt/AdAway/AdAway.apk:system/priv-app/AdAway/AdAway.apk \
+    vendor/bliss/prebuilt/AdAway/libblank_webserver_exec.so:system/lib/libblank_webserver_exec.so \
+    vendor/bliss/prebuilt/AdAway/libtcpdump_exec.so:system/lib/libtcpdump_exec.so
+
 # CameraNextMod
 PRODUCT_COPY_FILES += \
     vendor/bliss/prebuilt/CameraNextMod/CameraNextMod.apk:system/app/CameraNextMod/CameraNextMod.apk \
@@ -315,7 +316,7 @@ PRODUCT_COPY_FILES += \
 
 # Nova Launcher
 PRODUCT_COPY_FILES += \
-    vendor/bliss/prebuilt/NovaLauncher.apk:system/app/NovaLauncher/NovaLauncher.apk
+    vendor/bliss/prebuilt/NovaLauncher.apk:system/priv-app/NovaLauncher/NovaLauncher.apk
 
 # Poweramp
 PRODUCT_COPY_FILES += \
