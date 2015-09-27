@@ -11,7 +11,7 @@ ifdef BLISS_NIGHTLY
     BLISS_BUILDTYPE := NIGHTLY
 endif
 ifdef BLISS_GAMER
-    BLISS_BUILDTYPE := GAMER
+    BLISS_BUILDTYPE := Gamer
 endif
 ifdef BLISS_EXPERIMENTAL
     BLISS_BUILDTYPE := EXPERIMENTAL
@@ -22,16 +22,16 @@ endif
 # Set Unofficial if no buildtype set (Buildtype should ONLY be set by BLISS Devs!)
 ifdef BLISS_BUILDTYPE
 else
-    BLISS_BUILDTYPE := GAMER
+    BLISS_BUILDTYPE := Gamer
     BLISS_VERSION_MAJOR := 4
     BLISS_VERSION_MINOR := 0.2
 endif
 
 # Set BLISS version
 ifdef BLISS_RELEASE
-    BLISS_VERSION := BlissPop-v$(VERSION)
+    BLISS_VERSION := BlissRom-v$(VERSION)
 else
-    BLISS_VERSION := BlissPop-v$(VERSION)-$(BLISS_BUILD)-$(BLISS_BUILDTYPE)-$(shell date +%Y%m%d-%H%M)
+    BLISS_VERSION := BlissRom-v$(VERSION)-$(BLISS_BUILD)-$(BLISS_BUILDTYPE)-$(shell date +%Y%m%d-%H%M)
 endif
 
 BLISS_DISPLAY_VERSION := $(VERSION)
